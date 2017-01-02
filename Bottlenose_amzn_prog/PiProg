@@ -8,7 +8,7 @@ import numpy
 import time
 #import Gnuplot
 
-amazon = BN.Amazon('AKIAI6UMURXHPORZQGNA','RxkZCbjD+rlIAvRzaapTGGF8cRGZiy4IX8VBO434','davihasti-21',Region='UK',MaxQPS=0.8)
+amazon = BN.Amazon('AMZNPASSWORD','AMZNSECRETKEY','AMZNID',Region='UK',MaxQPS=0.8)
 
 i = 0
 ##starttime = time.time()
