@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+import sys
+sys.path.insert(0, r'/Users/Fuck/Documents/Amazon')
+
+import ids
 import csv
 import bottlenose as BN
 import lxml
@@ -6,9 +11,15 @@ import os
 from bs4 import BeautifulSoup
 import numpy
 import time
-#import Gnuplot
+import Gnuplot
 
-amazon = BN.Amazon('AMZNPASSWORD','AMZNSECRETKEY','AMZNID',Region='UK',MaxQPS=0.8)
+def error_handler(err):
+    ex = err['exception']
+    if isinstance(ex, HTTPError) and ex.code == 503:
+        time.sleep(random.expovariate(0.1))
+        return True
+
+amazon = BN.Amazon(ids.AWSKEY,ids.AWSSECRET,ids.AWSID,Region='UK', MaxQPS=0.8, ErrorHandler=error_handler)
 
 i = 0
 ##starttime = time.time()
@@ -52,8 +63,8 @@ for line in isbns:
         outfile.close()
     ##If new items have been added to isbns.txt, delete all entries from amznids.txt and then
     ##include the following two lines.   
-    ##AmznIds.write('{0}\n'.format(itmisbn))
-    ##AmznIds.close()
+    AmznIds.write('{0}\n'.format(itmisbn))
+    AmznIds.close()
     
     i = i + 1
     print i, time, itmisbn, retailprice, newprice, usedprice, salesrank
