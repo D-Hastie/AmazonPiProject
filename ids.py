@@ -1,3 +1,0 @@
-AWSKEY = 'AKIAIOO5GV6NWA6WPKGA' 
-AWSSECRET = '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' 
-AWSID = 'davihast-21'
