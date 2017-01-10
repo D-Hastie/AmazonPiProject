@@ -1,3 +1,4 @@
 *.pyc
 *ids.py
 *.swp
+*mailconf.py

@@ -52,9 +52,9 @@ for line in isbns:
         salesrank=0
     
     time = datetime.datetime.now().strftime("%Y/%m/%d:%H:%M:%S")
-    outfile = open('%s.txt' % itmisbn, 'a')
+    outfile = open('Datafiles/%s.txt' % itmisbn, 'a')
     AmznIds = open('amznids.txt', 'a')
-    if os.stat('%s.txt' % itmisbn).st_size==0:
+    if os.stat('Datafiles/%s.txt' % itmisbn).st_size==0:
         outfile.write('{0} {1} {2} {3} {4} {5}\n'.format('Time:', 'ISBN:', 'Retail-Price:', 'Lowest-New-Price:', 'Lowest-Used-Price:','Sales-Rank'))
         outfile.write('{0} {1} {2} {3} {4} {5}\n'.format(time, itmisbn, retailprice,newprice,usedprice,salesrank))
         outfile.close()
