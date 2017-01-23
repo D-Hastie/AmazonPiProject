@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
-sys.path.insert(0, r'/Users/Fuck/Documents/Amazon')
-
+sys.path.insert(0, r'/Users/Fuck/Documents/Amazon/Main')
+svdir = '/Users/Fuck/Documents/Amazon/Main'
 import ids
 import csv
 import bottlenose as BN
@@ -27,11 +27,14 @@ isbns = open('isbns.txt', 'r')
 print "Number", "ISBN:","Retail:","New Price:","Used Price:", "Sales Rank:"
 for line in isbns:
     isbnclean = line.strip()
+    print isbnclean
+    print type(isbnclean)
     response = amazon.ItemLookup(ItemId=isbnclean, ResponseGroup="Large")
     soup = BeautifulSoup(response, "xml")
     
     try:
         newprice=soup.LowestNewPrice.Amount.string
+        print 'new price type ', type(newprice), ' Value ', newprice
     except AttributeError:
         newprice=0
     try:
@@ -41,7 +44,7 @@ for line in isbns:
     try:
         itmisbn =soup.find('ISBN').contents[-1].strip()
     except AttributeError:
-        itmisbn =0
+        itmisbn = soup.find('ASIN').contents[-1].strip()
     try:
         retailprice=soup.Price.Amount.string
     except AttributeError:
@@ -50,11 +53,12 @@ for line in isbns:
         salesrank=soup.find('SalesRank').contents[-1].strip()
     except AttributeError:
         salesrank=0
+
     
     time = datetime.datetime.now().strftime("%Y/%m/%d:%H:%M:%S")
-    outfile = open('Datafiles/%s.txt' % itmisbn, 'a')
+    outfile = open(svdir+'/Datafiles/%s.txt' % itmisbn, 'a')
     AmznIds = open('amznids.txt', 'a')
-    if os.stat('Datafiles/%s.txt' % itmisbn).st_size==0:
+    if os.stat(svdir+'/Datafiles/%s.txt' % itmisbn).st_size==0:
         outfile.write('{0} {1} {2} {3} {4} {5}\n'.format('Time:', 'ISBN:', 'Retail-Price:', 'Lowest-New-Price:', 'Lowest-Used-Price:','Sales-Rank'))
         outfile.write('{0} {1} {2} {3} {4} {5}\n'.format(time, itmisbn, retailprice,newprice,usedprice,salesrank))
         outfile.close()

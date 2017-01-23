@@ -12,6 +12,8 @@ import pylab
 from datetime import datetime
 import pandas as pd
 
+datadir = '/Users/Fuck/Documents/Amazon/Main/Datafiles/'
+
 pd.set_option('display.mpl_style', 'default')
 
 #Counter variable set.
@@ -22,7 +24,7 @@ for line in isbns:
     isbnclean = line.strip()
 #Read Datafile
     
-    datafile = ('%s.txt' % isbnclean)
+    datafile = (datadir+'%s.txt' % isbnclean)
     
 
 
@@ -40,6 +42,7 @@ for line in isbns:
     CurrentRetail= pddata.iloc[-1, pddata.columns.get_loc('Retail-Price:')]
     CurrentNew= pddata.iloc[-1, pddata.columns.get_loc('Lowest-New-Price:')]
     CurrentSalesRank= pddata.iloc[-1, pddata.columns.get_loc('Sales-Rank')]
+    print type(CurrentUsed), 'Current Used Price Type'
 
     #Print the last data (current) data entries. Only for testing/checking really.
     # print CurrentUsed
