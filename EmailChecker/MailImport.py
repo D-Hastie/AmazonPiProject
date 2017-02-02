@@ -4,9 +4,8 @@ import imaplib
 import email
 import os
 import Mailconf
-
-svdir = '/Users/Fuck/Documents/Amazon/EmailChecker/mailattach'
-
+import directories
+svdir = directories.AttachmentLoc
 print 'Starting Mail Check'
 print 'Begin set up info'
 print 'Server setup'

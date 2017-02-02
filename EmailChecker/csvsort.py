@@ -28,7 +28,13 @@ j = 0
 FoundProductData = open('ProductData.txt', 'w')
 FoundProductData.write('{0} {1} {2} {3} {4} {5} {6} \n'.format('Number', 'ISBN', 'FoundCost', 'AmUsed','AmNew', 'AmRetail', 'AmRank'))
 
-with open(MailImport.file_path, 'r') as csvfile:
+FileChoose = 3
+if FileChoose == 1:
+	filepath = MailImport.file_path
+else:
+	filepath = './MailAttach/Oxfam_Berko.csv'
+
+with open(filepath, 'r') as csvfile:
     csvdata = pd.read_csv(csvfile ,dtype={'A': object})
     csvRow = csvdata['Row#']
     csvISBN= csvdata['A']
@@ -79,7 +85,6 @@ FoundProductData.close()
 
         
         
-  #
 # extracteddata = open ('extracteddata.txt', 'w')
 # extracteddata.write
 # extracteddata.write('{0} {1} {2} \n'.format('Row:', 'ISBN:', 'StorePrice:'))
